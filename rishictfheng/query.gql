@@ -1,0 +1,5 @@
+query getPassword{
+    passwordInput {
+        content
+    }
+}

@@ -1,0 +1,81 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Challenge</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>The flag is ERROR.. lol, just kidding, you really thought it’d be that easy? Nah. I wanted to put my own spin on making a portfolio, so welcome to the RISHI CTF! 🎉 Every challenge you complete unlocks a little fact about me, and when you’ve conquered them all, come back here to enter the final flag.
+
+            Clue: I’m a <a href="check_oldest_video.7z" download="check_oldest_video">SIMIPLE </a>
+             guy... or am I? 😏</h2>
+        <input type="text" id="inputBox" placeholder="Type here...">
+        <button onclick="submitInput()">Submit</button>
+        <h3 id="message" class="hidden">CTF Completed!</h3>
+        <div id="fireworks" class="hidden"></div>
+    </div>
+    <script>
+        // const inputBox = document.getElementById("inputBox");
+
+
+        const message = document.getElementById("message");
+        const fireworks = document.getElementById("fireworks");
+        const body = document.body;
+    
+        async function submitInput() {
+            let inputBox = document.getElementById("inputBox");
+            let input = inputBox.value;
+
+            const query = {
+                query: `
+                    mutation {
+                        processInput(input: "${input}")
+                    }
+                `
+            };
+
+            console.log(query);
+
+            const response = await fetch("/graphql", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(query)
+            });
+
+            let result = await response.json(); // **Waits for API response**
+
+            result = result.data.processInput;
+            console.log(result);
+
+
+            const message = document.getElementById("message");
+            const fireworks = document.getElementById("fireworks");
+            const body = document.body;
+
+            if(result==`Congratulations! You've unlocked the next level.`){
+                message.classList.remove("hidden");
+                inputBox.classList.remove("wrong");
+                inputBox.classList.add("success");
+                body.style.backgroundColor = "#00ff00";
+                fireworks.classList.remove("hidden");
+                setTimeout(() => {
+                    fireworks.classList.add("hidden");
+                    body.style.backgroundColor = "#1a1a1a";
+                }, 3000);
+            }else{
+                inputBox.classList.add("wrong");
+                setTimeout(() => inputBox.classList.remove("wrong"), 500);
+            }
+        }
+
+        
+        // function checkInput() {
+
+        // }
+    </script>
+</body>
+</html>
