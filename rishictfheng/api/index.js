@@ -36,7 +36,7 @@ const root = {
 
 // GraphQL Middleware
 app.use(
-  "/graphql",
+  "/api/graphql",
   graphqlHTTP({
     schema: schema,
     rootValue: root,
@@ -47,7 +47,7 @@ app.use(
 
 
 // Set the directory where EJS files will be stored
-app.set("views", path.join(__dirname, "views"));
+app.set("views", path.join(__dirname, "../views"));
 
 app.get("/", (req, res) => {
     res.render("rishi"); // This will render the rishi.ejs file from the "views" directory

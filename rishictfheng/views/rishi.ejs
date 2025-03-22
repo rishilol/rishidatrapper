@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CTF Challenge</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
@@ -40,7 +40,7 @@
 
             console.log(query);
 
-            const response = await fetch("/graphql", {
+            const response = await fetch("/api/graphql", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(query)
@@ -56,6 +56,7 @@
             const fireworks = document.getElementById("fireworks");
             const body = document.body;
 
+            //did you really think you can just inspect element this smh 
             if(result==`Congratulations! You've unlocked the next level.`){
                 message.classList.remove("hidden");
                 inputBox.classList.remove("wrong");
