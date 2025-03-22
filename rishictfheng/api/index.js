@@ -40,7 +40,7 @@ app.use(
   graphqlHTTP({
     schema: schema,
     rootValue: root,
-    graphiql: true, // Enables GraphiQL UI for testing queries
+    graphiql: true,
   })
 );
 
@@ -48,8 +48,8 @@ app.use(
 app.set("views", path.join(__dirname, "../views"));
 
 app.get("/", (req, res) => {
-    res.render("rishi"); // This will render the rishi.ejs file from the "views" directory
-  });
+    res.render("rishi");
+});
 
 // Export the app for Vercel
 module.exports = app;
